@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/Query.png</file>
+        <file>Resources/Options.png</file>
+        <file>Resources/Refresh.png</file>
+        <file>Resources/Logo.jpg</file>
+        <file>Resources/Locked.png</file>
+        <file>Resources/Unlocked.png</file>
+        <file>Resources/Save.png</file>
+        <file>Resources/Cancel.png</file>
+        <file>Resources/Run.png</file>
+        <file>Resources/Trash.png</file>
+        <file>Resources/TextEditor/align-center.png</file>
+        <file>Resources/TextEditor/align-left.png</file>
+        <file>Resources/TextEditor/align-right.png</file>
+        <file>Resources/TextEditor/open.png</file>
+        <file>Resources/TextEditor/paste.png</file>
+        <file>Resources/TextEditor/redo.png</file>
+        <file>Resources/TextEditor/save.png</file>
+        <file>Resources/TextEditor/undo.png</file>
+    </qresource>
+</RCC>
