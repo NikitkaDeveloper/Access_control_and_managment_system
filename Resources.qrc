@@ -18,5 +18,6 @@
         <file>Resources/TextEditor/redo.png</file>
         <file>Resources/TextEditor/save.png</file>
         <file>Resources/TextEditor/undo.png</file>
+        <file>Resources/edit.png</file>
     </qresource>
 </RCC>

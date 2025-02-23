@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QVariant>
+#include <QStringList>
+#include <QHash>
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -21,6 +23,10 @@ public:
     static QSqlQuery getInfoAboutUser(const QString& id);
     static QSqlQuery getInfoAboutChief(const QString& id_department);
     static bool connectToDBWithManager(const QString& connectionName = "manage");
+    static QStringList getProjectStatuses();
+    static QHash<QString, QString> getProjectsByID(const QString& id);
+    static bool setProjectStatus(const QString& project_name, const QString& status);
+    static QString getCurrentProjectByID(const QString& id);
     
     enum Roles {  // Роли в базе данных
         USER = 1, // Обычный пользователь

@@ -108,7 +108,7 @@
          </layout>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="labelTask">
+         <widget class="QLabel" name="labelProject">
           <property name="font">
            <font>
             <family>Noto Sans</family>
@@ -123,7 +123,7 @@
         <item row="1" column="1">
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLineEdit" name="lineTask">
+           <widget class="QLineEdit" name="lineProject">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -142,7 +142,7 @@
            </widget>
           </item>
           <item>
-           <widget class="Line" name="hlineTask">
+           <widget class="Line" name="hlineProject">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>

@@ -57,6 +57,11 @@ void managerDBForm::getListFromQueryColumn(QStringList &list, QSqlQuery& query, 
     list = str.split(',');
 }
 
+/**
+ * @brief initializeModel
+ * Инициализация модели tableView
+ * @param model - модель tableView
+ */
 void managerDBForm::initializeModel(QSqlTableModel* model) {
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();

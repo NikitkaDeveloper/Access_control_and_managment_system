@@ -505,40 +505,159 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Chat">
+     <widget class="QWidget" name="Projects">
       <attribute name="title">
-       <string>Чат</string>
+       <string>Проекты</string>
       </attribute>
-      <widget class="QLabel" name="label">
+      <widget class="QGroupBox" name="boxProjects">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>160</y>
-         <width>91</width>
-         <height>41</height>
+         <x>10</x>
+         <y>50</y>
+         <width>661</width>
+         <height>291</height>
         </rect>
        </property>
        <property name="font">
         <font>
          <family>Times New Roman</family>
-         <pointsize>24</pointsize>
+         <pointsize>26</pointsize>
         </font>
        </property>
-       <property name="text">
-        <string>Скоро</string>
+       <property name="title">
+        <string/>
        </property>
+       <widget class="QLabel" name="labelNoProjects">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>601</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>22</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сотрудник не задействован ни в одном проекте</string>
+        </property>
+       </widget>
       </widget>
-      <widget class="QPushButton" name="buttonOpenTextEditor">
+      <widget class="QPushButton" name="buttonRefresh">
        <property name="geometry">
         <rect>
-         <x>410</x>
-         <y>10</y>
-         <width>251</width>
-         <height>33</height>
+         <x>600</x>
+         <y>0</y>
+         <width>41</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="text">
-        <string>Открыть текстовый редактор</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Resources.qrc">
+         <normaloff>:/Resources/Refresh.png</normaloff>:/Resources/Refresh.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="buttonEdit">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>0</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Resources.qrc">
+         <normaloff>:/Resources/edit.png</normaloff>:/Resources/edit.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="buttonCancel">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>0</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Resources.qrc">
+         <normaloff>:/Resources/Cancel.png</normaloff>:/Resources/Cancel.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="buttonSave">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>430</x>
+         <y>0</y>
+         <width>41</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="Resources.qrc">
+         <normaloff>:/Resources/Save.png</normaloff>:/Resources/Save.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
        </property>
       </widget>
      </widget>

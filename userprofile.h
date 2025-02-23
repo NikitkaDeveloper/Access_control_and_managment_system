@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QAbstractTableModel>
 #include <QDesktopWidget>
+#include <QFormLayout>
+#include <QLabel>
+#include <QComboBox>
+#include <QFont>
 #include <qdatetime.h>
 #include <QFile>
 #include <QTextStream>
@@ -11,6 +15,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
+#include "connection.h"
 #include "TextEditor/widget.h"
 
 namespace Ui {
@@ -61,24 +66,35 @@ private slots:
     void on_calendar_clicked(const QDate &date);
     void on_buttonToday_clicked();
     
-    void on_buttonOpenTextEditor_clicked();
+    void on_buttonRefresh_clicked();
+    void on_buttonEdit_toggled(bool checked);
+    void on_buttonCancel_clicked();
+    void on_buttonSave_clicked();
     
 private:    
-    void fill();
+    void fillInfo();
     void setupTableView();
     bool readHisory(const QDate& date);
     void loadAuthLog(const QVector<QString>& times, const QVector<QString>& statuses);
+    void fillProjects(bool editMode);
+    void clearProjectsInfo();
+    void setSaveCancelButtonsVisible(bool status);
     
     const bool FAIL = 0;
     const bool SUCCESS = 1;
     
     Ui::userprofile *ui;
+    
+    QFormLayout* projectsFBox = nullptr;
+    QHash<QString, QString> projects;
+    QList<QLabel*> pProjectNames;        // Лист с указателями на элементы с названиями проектов в boxProjects
+    QList<QWidget*> pProjectStatuses;    // Лист с указателями на элементы со статусами проектов в boxProjects
+    
+    bool statusIsChanged = false;        // Если были изменения в статусе(ах) проекта(ов), то значение станет true
     QFile file;
     QSqlDatabase db;
     QSqlQuery query;
     QDate today;
-    
-    WidgetComment txtEdit;
 };
 
 #endif // USERPROFILE_H

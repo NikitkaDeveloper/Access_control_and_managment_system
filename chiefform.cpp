@@ -72,6 +72,8 @@ void chiefForm::fillInfo() {
     ui->lineStatus->setText(list.value("status").toString());
     ui->linePhone->setText(list.value("phone").toString());
     ui->lineEmail->setText(list.value("email").toString());
+    
+    ui->lineProject->setText(Connection::getCurrentProjectByID(list.value("id").toString()));
 }
 
 void chiefForm::on_buttonInfoCard_clicked() {

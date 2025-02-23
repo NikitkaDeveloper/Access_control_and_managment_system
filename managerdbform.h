@@ -57,7 +57,7 @@ private:
     QStringList headers;                // Список заголовков таблицы
     QStringList types;                  // Список типов данных столбцов
     
-    std::unique_ptr<SqlQueryDialog> querydlg = std::make_unique<SqlQueryDialog>();
+    std::unique_ptr<SqlQueryDialog> querydlg = std::make_unique<SqlQueryDialog>(); // Окно с созданием sql-запроса
 };
 
 #endif // MANAGERDBFORM_H

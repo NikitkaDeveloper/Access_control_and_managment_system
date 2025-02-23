@@ -65,30 +65,30 @@ void MainWindow::on_buttonAuth_clicked() {
     
     // Подключение к базе данных в зависимости от роли пользователя
     switch (role) {
-    case Connection::USER: {
-        if (!Connection::connectToDBWithUser())
+    case Connection::USER: {                    // Если подключается обычный пользователь
+        if (!Connection::connectToDBWithUser()) // Подключение к БД с правами обычного пользователя
             return;
         
-        userprofile* window = new userprofile(Connection::getInfoAboutUser(id));
+        userprofile* window = new userprofile(Connection::getInfoAboutUser(id)); // Создание окна сотрудника и получение информации о нём
         window->show();
         this->close();
         break;
     }
-    case Connection::CHIEF: {
-        if (!Connection::connectToDBWithUser())
+    case Connection::CHIEF: {                   // Если подключается начальник отдела
+        if (!Connection::connectToDBWithUser()) // Подключение к БД с правами обычного пользователя
             return;
         
-        QString id_department = Connection::getIDDepartmentByID(id);
-        chiefForm* window = new chiefForm(Connection::getInfoAboutChief(id_department));
+        QString id_department = Connection::getIDDepartmentByID(id);                     // Получение id отдела
+        chiefForm* window = new chiefForm(Connection::getInfoAboutChief(id_department)); // Создание окна начальника и получение списка сотрудников
         window->show();
         this->close();
         break;
     }
-    case Connection::MANAGER: {
-        if (!Connection::connectToDBWithManager())
+    case Connection::MANAGER: {                      // Если подключается менеджер БД
+        if (!Connection::connectToDBWithManager())   // Подключение к БД с правами менеджера БД
             return;
         
-        managerDBForm* window = new managerDBForm();
+        managerDBForm* window = new managerDBForm(); // Создание окна менеджера БД
         window->show();
         this->close();
         break;
