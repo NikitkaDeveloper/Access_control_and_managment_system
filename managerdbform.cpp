@@ -1,12 +1,28 @@
 #include "managerdbform.h"
 #include "ui_managerdbform.h"
 
-managerDBForm::managerDBForm(QWidget *parent) :
+managerDBForm::managerDBForm(const QString& id, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::managerDBForm) {
     ui->setupUi(this);
     move(qApp->desktop()->availableGeometry(this).center()-rect().center());
     
+    this->setStyleSheet(
+        "QComboBox {background-color: rgb(127, 67, 153); color: white;}"
+        "QAbstractItemView {background-color: rgb(127, 67, 153); color: white;}"
+        "QTableView {background-color: transparent; color: rgb(255, 255, 255);}"
+        "QHeaderView::section {background-color: transparent; color: rgb(255, 255, 255);}"
+        "QHeaderView {background-color: transparent;}"
+        "QTableCornerButton::section {background-color: transparent;}"
+        "QScrollBar {background-color: white;}"
+        "QScrollBar::handle {min-height: 0px; border: 0px solid white; border-radius: 10px; background-color: orange;}"
+        "QScrollBar::add-line {background-color: transparent;}"
+        "QScrollBar::sub-line {background-color: transparent;}"
+        "QAbstractScrollArea::corner {background: white;}"
+        "QLabel {color: rgb(255, 255, 255);}"
+        "QPushButton:disabled {color: rgb(100, 100, 100);}"
+        "QPushButton:enabled {color: rgb(255, 255, 255);}"
+        );
     ui->buttonSQLQuery->setStyleSheet("QPushButton { background-color: none; border: none; }");
     
     ui->labelDBName->setAlignment(Qt::AlignCenter);
@@ -16,15 +32,83 @@ managerDBForm::managerDBForm(QWidget *parent) :
     model = new QSqlTableModel(this, db);    
     initializeModel(model);
     
+    if (Connection::connectToDBWithUser())
+        profile = std::make_unique<userprofile>(Connection::getInfoAboutUser(id));
+    
     connectDB();
 }
 
 managerDBForm::~managerDBForm() {
     querydlg->close();
-    
     delete model;
     QSqlDatabase::removeDatabase("manage");
     delete ui;
+}
+
+void managerDBForm::resizeEvent(QResizeEvent* event) {
+    QPixmap pixmap(":/Resources/UI/user_background.png");
+    pixmap = pixmap.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, pixmap);
+    this->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/button.png");
+    pixmap = pixmap.scaled(ui->buttonAddRow->size(), Qt::IgnoreAspectRatio);
+    ui->buttonAddRow->setFlat(true);
+    ui->buttonAddRow->setAutoFillBackground(true);
+    palette = ui->buttonAddRow->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonAddRow->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/button.png");
+    pixmap = pixmap.scaled(ui->buttonDelRow->size(), Qt::IgnoreAspectRatio);
+    ui->buttonDelRow->setFlat(true);
+    ui->buttonDelRow->setAutoFillBackground(true);
+    palette = ui->buttonDelRow->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonDelRow->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonReadOnly->size(), Qt::IgnoreAspectRatio);
+    ui->buttonReadOnly->setFlat(true);
+    ui->buttonReadOnly->setAutoFillBackground(true);
+    palette = ui->buttonReadOnly->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonReadOnly->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonRefresh->size(), Qt::IgnoreAspectRatio);
+    ui->buttonRefresh->setFlat(true);
+    ui->buttonRefresh->setAutoFillBackground(true);
+    palette = ui->buttonRefresh->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonRefresh->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonRevertChanges->size(), Qt::IgnoreAspectRatio);
+    ui->buttonRevertChanges->setFlat(true);
+    ui->buttonRevertChanges->setAutoFillBackground(true);
+    palette = ui->buttonRevertChanges->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonRevertChanges->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonSubmitChanges->size(), Qt::IgnoreAspectRatio);
+    ui->buttonSubmitChanges->setFlat(true);
+    ui->buttonSubmitChanges->setAutoFillBackground(true);
+    palette = ui->buttonSubmitChanges->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonSubmitChanges->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonInfoCard->size(), Qt::IgnoreAspectRatio);
+    ui->buttonInfoCard->setFlat(true);
+    ui->buttonInfoCard->setAutoFillBackground(true);
+    palette = ui->buttonInfoCard->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonInfoCard->setPalette(palette);
+    
+    QWidget::resizeEvent(event);
 }
 
 /**
@@ -161,7 +245,7 @@ bool managerDBForm::connectDB() {
         resizeUIElementByContent(*ui->labelTableName, ui->labelTableName->text());
         
         ui->buttonSQLQuery->setEnabled(true);
-        ui->TbuttonOptions->setEnabled(true);
+        ui->buttonInfoCard->setEnabled(true);
         if (!ui->buttonReadOnly->isChecked())
             ui->buttonAddRow->setEnabled(true);
     }
@@ -170,11 +254,11 @@ bool managerDBForm::connectDB() {
 }
 
 /**
- * @brief on_TbuttonOptions_clicked
- * Скоро
+ * @brief on_buttonInfoCard_clicked
+ * Отображение личной карточки менеджера БД
  */
-void managerDBForm::on_TbuttonOptions_clicked() {
-    
+void managerDBForm::on_buttonInfoCard_clicked() {
+    profile->show();
 }
 
 /**
@@ -274,7 +358,7 @@ void managerDBForm::on_buttonRefresh_clicked() {
         
         ui->buttonReadOnly->setChecked(true);
         ui->buttonSQLQuery->setEnabled(false);
-        ui->TbuttonOptions->setEnabled(false);
+        ui->buttonInfoCard->setEnabled(false);
         
         ui->tableView->reset();
     }

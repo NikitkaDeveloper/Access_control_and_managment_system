@@ -182,7 +182,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="TbuttonOptions">
+        <widget class="QPushButton" name="buttonInfoCard">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -191,7 +191,7 @@
          </property>
          <property name="icon">
           <iconset resource="Resources.qrc">
-           <normaloff>:/Resources/Options.png</normaloff>:/Resources/Options.png</iconset>
+           <normaloff>:/Resources/PersonInfo.png</normaloff>:/Resources/PersonInfo.png</iconset>
          </property>
          <property name="iconSize">
           <size>

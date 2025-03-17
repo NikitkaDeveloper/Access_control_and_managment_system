@@ -64,11 +64,13 @@ QSqlQuery Connection::getInfoAboutUser(const QString& id) {
     
     QSqlQuery query(db);
     // Получение всей рабочей информации о сотруднике из базы данных
-    query.prepare(QString("SELECT e.*, d.department, j.job FROM employees e "
+    query.prepare(QString("SELECT e.*, d.department, j.job, s.schedule FROM employees e "
                           "INNER JOIN departments d "
                           "ON e.id_department = d.id "
                           "INNER JOIN jobs j "
                           "ON e.id_job = j.id "
+                          "INNER JOIN schedules s "
+                          "ON e.id_schedule = s.id "
                           "WHERE e.id = :id"));
     query.bindValue(":id", id);
     query.exec();
@@ -87,11 +89,13 @@ QSqlQuery Connection::getInfoAboutChief(const QString& id_department) {
     QSqlDatabase db = QSqlDatabase::database("user");
     
     QSqlQuery query(db);
-    query.prepare(QString("SELECT e.*, d.department, j.job FROM employees e "
+    query.prepare(QString("SELECT e.*, d.department, j.job, s.schedule FROM employees e "
                           "INNER JOIN departments d "
                           "ON e.id_department = d.id "
                           "INNER JOIN jobs j "
                           "ON e.id_job = j.id "
+                          "INNER JOIN schedules s "
+                          "ON e.id_schedule = s.id "
                           "WHERE e.id_department = :id_department"));
     query.bindValue(":id_department", id_department);
     query.exec();

@@ -27,6 +27,7 @@ private slots:
     void clearUserProfileMember();
     
 private:
+    virtual void resizeEvent(QResizeEvent* event) override;
     bool getSelectedButtonIndex();
     
     Ui::chiefForm *ui;

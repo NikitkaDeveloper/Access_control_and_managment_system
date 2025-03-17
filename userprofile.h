@@ -71,7 +71,7 @@ private slots:
     void on_buttonCancel_clicked();
     void on_buttonSave_clicked();
     
-private:    
+private:
     void fillInfo();
     void setupTableView();
     bool readHisory(const QDate& date);
@@ -79,6 +79,8 @@ private:
     void fillProjects(bool editMode);
     void clearProjectsInfo();
     void setSaveCancelButtonsVisible(bool status);
+    
+    virtual void resizeEvent(QResizeEvent* event) override;
     
     const bool FAIL = 0;
     const bool SUCCESS = 1;

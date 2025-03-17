@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QDesktopWidget>
+#include <QResizeEvent>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -23,6 +24,8 @@ private slots:
     void on_buttonClear_clicked();
     
 private:
+    virtual void resizeEvent(QResizeEvent* event) override;
+    
     Ui::SqlQueryDialog *ui;
     QSqlDatabase db;
 };

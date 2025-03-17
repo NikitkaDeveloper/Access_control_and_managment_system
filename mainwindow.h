@@ -6,6 +6,7 @@
 #include <QTextEdit>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QResizeEvent>
 #include <QKeyEvent>
 
 #include "userprofile.h"
@@ -36,6 +37,8 @@ private slots:
     void on_buttonAuth_clicked();
     
 private:
+    virtual void resizeEvent(QResizeEvent* event) override;
+    
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

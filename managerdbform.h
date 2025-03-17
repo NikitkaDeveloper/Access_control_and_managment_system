@@ -4,8 +4,10 @@
 #include <QWidget>
 #include <QMessageBox>
 #include <QSqlTableModel>
+#include <QScrollBar>
 #include <QLabel>
 
+#include "userprofile.h"
 #include "sqlquerydialog.h"
 
 namespace Ui {
@@ -16,14 +18,14 @@ class managerDBForm : public QWidget {
     Q_OBJECT
     
 public:
-    explicit managerDBForm(QWidget *parent = nullptr);
+    explicit managerDBForm(const QString& id, QWidget *parent = nullptr);
     ~managerDBForm();
     
     bool connectDB();
     bool loadTable(const QString& table_name);
     
 private slots:
-    void on_TbuttonOptions_clicked();
+    void on_buttonInfoCard_clicked();
     
     void on_comboBoxTables_currentTextChanged(const QString& table_name);
     
@@ -41,6 +43,7 @@ private slots:
     void on_buttonSQLQuery_clicked();
     
 private:
+    virtual void resizeEvent(QResizeEvent* event) override;
     void resizeUIElementByContent(QWidget& el, const QString& text);
     void getListFromQueryColumn(QStringList& list, QSqlQuery& query, const QString& column_name);
     void initializeModel(QSqlTableModel* model);
@@ -57,7 +60,8 @@ private:
     QStringList headers;                // Список заголовков таблицы
     QStringList types;                  // Список типов данных столбцов
     
-    std::unique_ptr<SqlQueryDialog> querydlg = std::make_unique<SqlQueryDialog>(); // Окно с созданием sql-запроса
+    std::unique_ptr<userprofile> profile = nullptr; // Личная карточка
+    std::unique_ptr<SqlQueryDialog> querydlg = std::make_unique<SqlQueryDialog>();                          // Окно с созданием sql-запроса
 };
 
 #endif // MANAGERDBFORM_H

@@ -19,5 +19,12 @@
         <file>Resources/TextEditor/save.png</file>
         <file>Resources/TextEditor/undo.png</file>
         <file>Resources/edit.png</file>
+        <file>Resources/UI/auth_background.png</file>
+        <file>Resources/UI/auth_button.png</file>
+        <file>Resources/UI/button.png</file>
+        <file>Resources/UI/chief_background.png</file>
+        <file>Resources/UI/item.png</file>
+        <file>Resources/UI/user_background.png</file>
+        <file>Resources/PersonInfo.png</file>
     </qresource>
 </RCC>

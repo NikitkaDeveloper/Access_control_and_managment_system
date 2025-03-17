@@ -5,11 +5,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    /* qApp->setStyleSheet(
-        "QWidget {background-color: rgb(202, 240, 248);}"
-        "QLabel {color: rgb(0, 119, 182);}"
-        "QLineEdit {color: rgb(0, 180, 216);}"
-        ); */
+    
+    this->setStyleSheet(
+        "QLabel {color: rgb(255, 255, 255);}"
+        "QPushButton:disabled {color: rgb(100, 100, 100);}"
+        "QPushButton:enabled {color: rgb(255, 255, 255);}"
+        );
+    
     move(qApp->desktop()->availableGeometry(this).center()-rect().center());
     
     ui->textLogin->setFocus();
@@ -17,6 +19,24 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event) {
+    QPixmap pixmap(":/Resources/UI/auth_background.png");
+    pixmap = pixmap.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, pixmap);
+    this->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonAuth->size(), Qt::IgnoreAspectRatio);
+    ui->buttonAuth->setFlat(true);
+    ui->buttonAuth->setAutoFillBackground(true);
+    palette = ui->buttonAuth->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonAuth->setPalette(palette);
+    
+    QMainWindow::resizeEvent(event);
 }
 
 void MainWindow::on_textLogin_textChanged() {
@@ -88,7 +108,7 @@ void MainWindow::on_buttonAuth_clicked() {
         if (!Connection::connectToDBWithManager())   // Подключение к БД с правами менеджера БД
             return;
         
-        managerDBForm* window = new managerDBForm(); // Создание окна менеджера БД
+        managerDBForm* window = new managerDBForm(id); // Создание окна менеджера БД
         window->show();
         this->close();
         break;

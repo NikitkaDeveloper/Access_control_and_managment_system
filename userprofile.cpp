@@ -10,7 +10,13 @@ userprofile::userprofile(QSqlQuery q, QWidget *parent)
     db = QSqlDatabase::database("user");
     query = q;
     
-    window()->setStyleSheet(
+    this->setStyleSheet(
+        "QTabBar::tab {background: transparent; color: rgb(255, 255, 255);}"
+        // "QFrame {color: cyan;}"
+        // "QLayout {bckground-color: rgba(0, 0, 0, 0);}"
+        // "QLabel {color: rgb(255, 255, 255);}"
+        "QPushButton:disabled {color: rgb(100, 100, 100);}"
+        "QPushButton:enabled {color: rgb(255, 255, 255);}"
         "QLineEdit {background-color: rgba(0, 0, 0, 0); qproperty-frame: false;}"
         );
     
@@ -31,6 +37,24 @@ userprofile::userprofile(QSqlQuery q, QWidget *parent)
     file.setFileName("../ACMS/History/" + ui->lineName->text() + ".txt");
     file.open(QIODevice::ReadOnly);
     readHisory(today);
+}
+
+void userprofile::resizeEvent(QResizeEvent* event) {
+    QPixmap pixmap(":/Resources/UI/user_background.png");
+    pixmap = pixmap.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, pixmap);
+    this->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/button.png");
+    pixmap = pixmap.scaled(ui->buttonToday->size(), Qt::IgnoreAspectRatio);
+    ui->buttonToday->setFlat(true);
+    ui->buttonToday->setAutoFillBackground(true);
+    palette = ui->buttonToday->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonToday->setPalette(palette);
+    
+    QWidget::resizeEvent(event);
 }
 
 TableAuthLogModel::TableAuthLogModel(QObject* parent) : QAbstractTableModel(parent) {}
@@ -205,7 +229,7 @@ void userprofile::on_buttonToday_clicked() {
 void userprofile::fillInfo() {
     query.first();
     
-    QPixmap pic("../ACMS/" + query.value("avatar").toString());
+    QPixmap pic("../ACMS/Avatars/" + query.value("avatar").toString());
     QSize picsize(ui->avatar->size());
     pic = pic.scaled(picsize, Qt::KeepAspectRatio);
     ui->avatar->setPixmap(pic);
@@ -230,7 +254,7 @@ void userprofile::fillProjects(bool editMode) {
     QLabel* labelName = nullptr;
     QLabel* labelStatus = nullptr;
     QComboBox* comboBoxStatus = nullptr;
-    const int pointSize = 16;
+    const int pointSize = 11;
     for (QHash<QString, QString>::ConstIterator it = projects.cbegin(); it != projects.cend(); ++it) {
         labelName = new QLabel(it.key());
         pProjectNames.push_back(labelName);

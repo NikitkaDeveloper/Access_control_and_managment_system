@@ -509,157 +509,152 @@
       <attribute name="title">
        <string>Проекты</string>
       </attribute>
-      <widget class="QGroupBox" name="boxProjects">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>50</y>
-         <width>661</width>
-         <height>291</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Times New Roman</family>
-         <pointsize>26</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string/>
-       </property>
-       <widget class="QLabel" name="labelNoProjects">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>20</y>
-          <width>601</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>22</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Сотрудник не задействован ни в одном проекте</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QPushButton" name="buttonRefresh">
-       <property name="geometry">
-        <rect>
-         <x>600</x>
-         <y>0</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="Resources.qrc">
-         <normaloff>:/Resources/Refresh.png</normaloff>:/Resources/Refresh.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="buttonEdit">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>550</x>
-         <y>0</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="Resources.qrc">
-         <normaloff>:/Resources/edit.png</normaloff>:/Resources/edit.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="buttonCancel">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>480</x>
-         <y>0</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="Resources.qrc">
-         <normaloff>:/Resources/Cancel.png</normaloff>:/Resources/Cancel.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="buttonSave">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>430</x>
-         <y>0</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="Resources.qrc">
-         <normaloff>:/Resources/Save.png</normaloff>:/Resources/Save.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonSave">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="Resources.qrc">
+             <normaloff>:/Resources/Save.png</normaloff>:/Resources/Save.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonCancel">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="Resources.qrc">
+             <normaloff>:/Resources/Cancel.png</normaloff>:/Resources/Cancel.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="Resources.qrc">
+             <normaloff>:/Resources/edit.png</normaloff>:/Resources/edit.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonRefresh">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="Resources.qrc">
+             <normaloff>:/Resources/Refresh.png</normaloff>:/Resources/Refresh.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="boxProjects">
+         <property name="minimumSize">
+          <size>
+           <width>661</width>
+           <height>291</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Times New Roman</family>
+           <pointsize>26</pointsize>
+          </font>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QLabel" name="labelNoProjects">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>601</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>22</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Сотрудник не задействован ни в одном проекте</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="History">
       <attribute name="title">

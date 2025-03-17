@@ -6,9 +6,17 @@ chiefForm::chiefForm(QSqlQuery q, QWidget *parent) :
     ui(new Ui::chiefForm) {
     ui->setupUi(this);
     move(qApp->desktop()->availableGeometry(this).center()-rect().center());
-    window()->setStyleSheet(
-        "QLineEdit {background-color: rgba(0, 0, 0, 0); qproperty-frame: false;}"
+    
+    this->setStyleSheet(
+        "QFrame {color: orange;}"
+        "QGroupBox {background-color: transparent;}"
+        "QGroupBox:title {color: rgb(255, 255, 255);}"
+        "QLabel {color: rgb(255, 255, 255);}"
+        "QPushButton:disabled {color: rgb(100, 100, 100);}"
+        "QPushButton:enabled {color: rgb(255, 255, 255);}"
+        "QLineEdit {background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); qproperty-frame: false;}"
         );
+    
     list = q;
     
     employeesVBox = new QVBoxLayout;
@@ -28,6 +36,36 @@ chiefForm::~chiefForm() {
     delete employeesVBox;
     
     delete ui;
+}
+
+void chiefForm::resizeEvent(QResizeEvent* event) {
+    QPixmap pixmap(":/Resources/UI/chief_background.png");
+    pixmap = pixmap.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, pixmap);
+    this->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonInfoCard->size(), Qt::IgnoreAspectRatio);
+    ui->buttonInfoCard->setFlat(true);
+    ui->buttonInfoCard->setAutoFillBackground(true);
+    palette = ui->buttonInfoCard->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonInfoCard->setPalette(palette);
+    
+    if (!pButtons.isEmpty()) {
+        pixmap = QPixmap(":/Resources/UI/item.png");
+        for (int i = 0; i < pButtons.size(); ++i) {
+            pixmap = pixmap.scaled(pButtons.at(i)->size(), Qt::IgnoreAspectRatio);
+            pButtons.at(i)->setFlat(true);
+            pButtons.at(i)->setAutoFillBackground(true);
+            palette = pButtons.at(i)->palette();
+            palette.setBrush(QPalette::Button, pixmap);
+            pButtons.at(i)->setPalette(palette);
+        }
+    }
+    
+    QWidget::resizeEvent(event);
 }
 
 bool chiefForm::getSelectedButtonIndex() {
@@ -64,7 +102,7 @@ void chiefForm::fillInfo() {
     
     list.seek(pos);
     
-    QPixmap pic("../ACMS/" + list.value("avatar").toString());
+    QPixmap pic("../ACMS/Avatars/" + list.value("avatar").toString());
     QSize picsize(ui->labelAvatar->size());
     pic = pic.scaled(picsize, Qt::KeepAspectRatio);
     ui->labelAvatar->setPixmap(pic);

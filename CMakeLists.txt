@@ -34,11 +34,6 @@ set(PROJECT_SOURCES
 		sqlquerydialog.cpp
 		sqlquerydialog.ui
 		Resources.qrc
-		TextEditor/format.h
-		TextEditor/format.cpp
-		TextEditor/widget.h
-		TextEditor/widget.cpp
-		TextEditor/widget.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

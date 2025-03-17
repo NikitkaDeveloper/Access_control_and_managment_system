@@ -136,6 +136,9 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
             <property name="readOnly">
              <bool>true</bool>
             </property>
