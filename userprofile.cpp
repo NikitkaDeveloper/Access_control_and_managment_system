@@ -12,13 +12,29 @@ userprofile::userprofile(QSqlQuery q, QWidget *parent)
     
     this->setStyleSheet(
         "QTabBar::tab {background: transparent; color: rgb(255, 255, 255);}"
-        // "QFrame {color: cyan;}"
-        // "QLayout {bckground-color: rgba(0, 0, 0, 0);}"
-        // "QLabel {color: rgb(255, 255, 255);}"
+        "QFrame {color: orange;}"
+        "QGroupBox {background-color: rgb(127, 67, 153);}"
+        "QComboBox {background-color: rgb(127, 67, 153); color: white;}"
+        "QAbstractItemView {background-color: rgb(127, 67, 153); color: white;}"
+        "#qt_calendar_navigationbar {background-color: rgb(127, 67, 153);}"
+        "#qt_calendar_prevmonth {background-color: transparent; qproperty-icon: none; qproperty-text: '<'; color: white;}"
+        "#qt_calendar_nextmonth {background-color: transparent; qproperty-icon: none; qproperty-text: '>'; color: white;}"
+        "#qt_calendar_yearbutton {color: white;}"
+        "#qt_calendar_monthbutton {color: white;}"
+        "#qt_calendar_yearedit {background: transparent;}"
+        "QCalendarWidget QToolButton QMenu {background-color: rgb(127, 67, 153); color: white;}"
+        "QLabel {color: rgb(255, 255, 255);}"
         "QPushButton:disabled {color: rgb(100, 100, 100);}"
         "QPushButton:enabled {color: rgb(255, 255, 255);}"
-        "QLineEdit {background-color: rgba(0, 0, 0, 0); qproperty-frame: false;}"
+        "QLineEdit {background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); qproperty-frame: false;}"
+        "QMessageBox QLabel {color: rgb(0, 0, 0);}"
+        "QMessageBox QPushButton:enabled {color: rgb(0, 0, 0);}"
         );
+    QColor color(127, 67, 153);
+    QBrush brush(color);
+    QTextCharFormat* format = new QTextCharFormat();
+    format->setBackground(brush);
+    ui->calendar->setHeaderTextFormat(*format);
     
     fillInfo(); // Заполнение информации о сотруднике (кроме проектов)
     setSaveCancelButtonsVisible(false);
@@ -45,6 +61,46 @@ void userprofile::resizeEvent(QResizeEvent* event) {
     QPalette palette;
     palette.setBrush(QPalette::Window, pixmap);
     this->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonCancel->size(), Qt::IgnoreAspectRatio);
+    ui->buttonCancel->setFlat(true);
+    ui->buttonCancel->setAutoFillBackground(true);
+    palette = ui->buttonCancel->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonCancel->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonEdit->size(), Qt::IgnoreAspectRatio);
+    ui->buttonEdit->setFlat(true);
+    ui->buttonEdit->setAutoFillBackground(true);
+    palette = ui->buttonEdit->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonEdit->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonRefresh->size(), Qt::IgnoreAspectRatio);
+    ui->buttonRefresh->setFlat(true);
+    ui->buttonRefresh->setAutoFillBackground(true);
+    palette = ui->buttonRefresh->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonRefresh->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/auth_button.png");
+    pixmap = pixmap.scaled(ui->buttonSave->size(), Qt::IgnoreAspectRatio);
+    ui->buttonSave->setFlat(true);
+    ui->buttonSave->setAutoFillBackground(true);
+    palette = ui->buttonSave->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonSave->setPalette(palette);
+    
+    pixmap = QPixmap(":/Resources/UI/button.png");
+    pixmap = pixmap.scaled(ui->buttonAddProject->size(), Qt::IgnoreAspectRatio);
+    ui->buttonAddProject->setFlat(true);
+    ui->buttonAddProject->setAutoFillBackground(true);
+    palette = ui->buttonAddProject->palette();
+    palette.setBrush(QPalette::Button, pixmap);
+    ui->buttonAddProject->setPalette(palette);
     
     pixmap = QPixmap(":/Resources/UI/button.png");
     pixmap = pixmap.scaled(ui->buttonToday->size(), Qt::IgnoreAspectRatio);
@@ -243,6 +299,10 @@ void userprofile::fillInfo() {
     ui->lineOrderOut->setText(query.value("orderout").toString());
     ui->linePhone->setText(query.value("phone").toString());
     ui->lineEmail->setText(query.value("email").toString());
+    
+    bool ok = query.value("id_role").toInt() == 2;
+    ui->buttonAddProject->setEnabled(ok);
+    ui->buttonAddProject->setVisible(ok);
 }
 
 /**
@@ -366,4 +426,17 @@ void userprofile::on_buttonSave_clicked() {
         }
     }
     statusIsChanged = false;
+}
+
+void userprofile::on_buttonAddProject_clicked() {
+    addprojectdialog = new AddProjectDialog();
+    connect(addprojectdialog, &QWidget::destroyed, this, &userprofile::clearDialogMemder);
+    addprojectdialog->show();
+}
+
+void userprofile::clearDialogMemder() {
+    if (addprojectdialog != nullptr) {
+        delete addprojectdialog;
+        addprojectdialog = nullptr;
+    }
 }

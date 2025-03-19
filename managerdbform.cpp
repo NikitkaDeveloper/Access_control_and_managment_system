@@ -22,6 +22,8 @@ managerDBForm::managerDBForm(const QString& id, QWidget *parent) :
         "QLabel {color: rgb(255, 255, 255);}"
         "QPushButton:disabled {color: rgb(100, 100, 100);}"
         "QPushButton:enabled {color: rgb(255, 255, 255);}"
+        "QMessageBox QLabel {color: rgb(0, 0, 0);}"
+        "QMessageBox QPushButton:enabled {color: rgb(0, 0, 0);}"
         );
     ui->buttonSQLQuery->setStyleSheet("QPushButton { background-color: none; border: none; }");
     
@@ -403,14 +405,14 @@ void managerDBForm::on_buttonDelRow_clicked() {
     
     if (!query.exec())
         QMessageBox::critical(this, tr("Запрос не выполнен"), tr("Не удалось удалить строку!"));
-    else {
+    else /* if (rowIndex == rowCount) */ {
         // Сброс счётчика id
-        query.prepare("ALTER SEQUENCE " + currentTable + "_id_seq RESTART WITH :rowCount;");
+        // query.prepare("ALTER SEQUENCE " + currentTable + "_id_seq RESTART WITH :rowCount;");
         // query.bindValue(":currentTable", currentTable);
-        query.bindValue(":rowCount", QString::number(rowCount));
+        // query.bindValue(":rowCount", QString::number(rowCount));
         
-        if (!query.exec())
-            QMessageBox::critical(this, tr("Запрос не выполнен"), tr("Не удалось убавить счётчик!"));
+        // if (!query.exec())
+        //    QMessageBox::critical(this, tr("Запрос не выполнен"), tr("Не удалось убавить счётчик!"));
         
         setTableInModel(currentTable);
     }

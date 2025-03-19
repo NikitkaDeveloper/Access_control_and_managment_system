@@ -33,6 +33,9 @@ set(PROJECT_SOURCES
 		sqlquerydialog.h
 		sqlquerydialog.cpp
 		sqlquerydialog.ui
+		addprojectdialog.h
+		addprojectdialog.cpp
+		addprojectdialog.ui
 		Resources.qrc
 )
 

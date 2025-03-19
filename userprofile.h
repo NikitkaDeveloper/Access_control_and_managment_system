@@ -16,7 +16,7 @@
 #include <QSqlError>
 
 #include "connection.h"
-#include "TextEditor/widget.h"
+#include "addprojectdialog.h"
 
 namespace Ui {
 class userprofile;
@@ -70,6 +70,7 @@ private slots:
     void on_buttonEdit_toggled(bool checked);
     void on_buttonCancel_clicked();
     void on_buttonSave_clicked();
+    void on_buttonAddProject_clicked();
     
 private:
     void fillInfo();
@@ -79,6 +80,7 @@ private:
     void fillProjects(bool editMode);
     void clearProjectsInfo();
     void setSaveCancelButtonsVisible(bool status);
+    void clearDialogMemder();
     
     virtual void resizeEvent(QResizeEvent* event) override;
     
@@ -97,6 +99,8 @@ private:
     QSqlDatabase db;
     QSqlQuery query;
     QDate today;
+    
+    AddProjectDialog* addprojectdialog = nullptr;
 };
 
 #endif // USERPROFILE_H

@@ -15,6 +15,8 @@ chiefForm::chiefForm(QSqlQuery q, QWidget *parent) :
         "QPushButton:disabled {color: rgb(100, 100, 100);}"
         "QPushButton:enabled {color: rgb(255, 255, 255);}"
         "QLineEdit {background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); qproperty-frame: false;}"
+        "QMessageBox QLabel {color: rgb(0, 0, 0);}"
+        "QMessageBox QPushButton:enabled {color: rgb(0, 0, 0);}"
         );
     
     list = q;
@@ -81,7 +83,7 @@ bool chiefForm::getSelectedButtonIndex() {
 
 void chiefForm::fillBoxEmployees() {
     while (list.next()) {
-        employee = new QPushButton(list.value("fullname").toString());
+        employee = new QPushButton(list.value("id").toString() + ". " + list.value("fullname").toString());
         pButtons.push_back(employee);
         employeesVBox->addWidget(employee);
         
@@ -122,6 +124,8 @@ void chiefForm::on_buttonInfoCard_clicked() {
 }
 
 void chiefForm::clearUserProfileMember() {
-    if (profile != nullptr)
+    if (profile != nullptr) {
         delete profile;
+        profile = nullptr;
+    }
 }

@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
         "QLabel {color: rgb(255, 255, 255);}"
         "QPushButton:disabled {color: rgb(100, 100, 100);}"
         "QPushButton:enabled {color: rgb(255, 255, 255);}"
+        "QMessageBox QLabel {color: rgb(0, 0, 0);}"
+        "QMessageBox QPushButton:enabled {color: rgb(0, 0, 0);}"
         );
     
     move(qApp->desktop()->availableGeometry(this).center()-rect().center());
